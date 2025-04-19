@@ -1,0 +1,24 @@
+---
+all:
+  children:
+    syslog-server:
+      hosts:
+        syslog-server-01:
+          ansible_host: 192.168.1.2
+        syslog-server-02:
+          ansible_host: 192.168.1.3
+
+    elasticsearch-server:
+      hosts:
+        elasticsearch-server-01:
+          ansible_host: 192.168.1.4
+
+    kibana-server:
+      hosts:
+        kibana-server-01:
+          ansible_host: 192.168.1.5
+
+    logstash-server:
+      hosts:
+        logstash-server-01:
+          ansible_host: 192.168.1.6
