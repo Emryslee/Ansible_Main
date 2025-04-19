@@ -1,0 +1,19 @@
+---
+- name: Create ops user
+  user:
+    name: ops
+    groups: wheel
+    shell: /bin/bash
+    create_home: yes
+    state: present
+
+- name: Set SSH pubkey for ops
+  authorized_key:
+    user: ops
+    key: "{{ common_ops_ssh_pubkey }}"
+    state: present
+- name: Set SSH pubkey for ops
+  authorized_key:
+    user: ops
+    key: "{{ common_ops_ssh_pubkey }}"
+    state: present
