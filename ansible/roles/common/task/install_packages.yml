@@ -3,16 +3,9 @@
   block:
   - name: Install basic tools
     package:
-      name:
-        - vim
-        - traceroute
-        - curl
-        - wget
-        - tcpdump
-        - tree
-        - net-tools
-        - bash-completion
+      name: "{{ item}}"
       state: present
+    loop: "{{ common_install_packages}}"
 
   - name: Install VMware tools
     package:
