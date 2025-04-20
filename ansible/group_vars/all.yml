@@ -1,7 +1,3 @@
----
-# user setup
-common_ops_user: ops
-
 # ssh setup
 sshd_port: 22
 sshd_permit_root_login: "no"
