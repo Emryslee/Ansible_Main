@@ -1,3 +1,14 @@
 ---
+# common packages
+common_install_packages:
+  - vim
+  - traceroute
+  - curl
+  - wget
+  - tcpdump
+  - tree
+  - net-tools
+  - bash-completion
+
 # user setup
 common_ops_user: ops
