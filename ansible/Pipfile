@@ -12,7 +12,6 @@ testinfra = "=8.0.0"
 
 [packages]
 ansible = "*"
-ansible-core = "*"
 ansible-lint = "*"
 flake8 = "*"
 apache-libcloud = "*"
