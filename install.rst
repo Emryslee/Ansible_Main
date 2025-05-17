@@ -2,7 +2,7 @@
 
 ## システム要件
 | 項目| 内容 | 備考 |
-|:--------|:--------|:--------|
+|--------|--------|--------|
 | Python | 3.9以上 | システムにPython3.9がインストールされていること |
 | pipenv | 仮想環境構築・管理ツール | pip install pipenv でインストール |
 | Ansible | 自動化構成管理ツール（仮想環境内） | Pipenvを使ってインストール(Pipfileに記述済み) |
@@ -29,11 +29,11 @@ Ansibleのロールはすべて **ansible-galaxy** を通じてRoles用リポジ
 ロールレポジトリのDownloadはレポジトリdeploy時自動的に実施する仕組みとなります。
 自動的にDowdloadされなかった場合下記コマンドを実行します。
 
-      pipenv run ansible-galaxy install -r requirements.yml -p ./roles
+      pipenv run ansible-galaxy install -r requirements.yml
 
 ## プレイブックの実行
 ------------------
-Ansible プレイブックを実行するには以下のコマンドを使用してください:
+Ansible プレイブックを実行するには以下のコマンドを使用してください。
 
       pipenv run ansible-playbook -i inventory.yml playbook.yml
 
