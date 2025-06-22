@@ -1,0 +1,38 @@
+stages:
+  - lint
+  - deploy
+
+variables:
+  SSH_USER: "ansible"
+  SSH_HOST: "192.168.3.199"
+  SSH_PORT: "22"
+  DEPLOY_PATH: "/Project"
+
+lint:
+  stage: lint
+  image: python:3.9
+  before_script:
+    - apt-get update && apt-get install -y openssh-client
+    - pip install ansible ansible-lint flake8
+  script:
+    - ansible-lint .
+    - flake8 .
+  only:
+    - main
+    - /^feature\/.*$/
+
+deploy:
+  stage: deploy
+  image: python:3.9
+  before_script:
+    - apt-get update && apt-get install -y openssh-client rsync
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -p $SSH_PORT -H $SSH_HOST >> ~/.ssh/known_hosts
+  script:
+    # .gitフォルダを無視しつつ、他は全部差分転送、ansibleサーバにrsyncのインストールは必須
+    - rsync -avz --delete --exclude='.git' --chmod=F644,D755 -e "ssh -p $SSH_PORT" ./ $SSH_USER@$SSH_HOST:$DEPLOY_PATH/
+    - ssh -p $SSH_PORT $SSH_USER@$SSH_HOST "mkdir -p $DEPLOY_PATH/fact && chmod 755 $DEPLOY_PATH/fact"
+  only:
+    - main
